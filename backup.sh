@@ -7,6 +7,7 @@ PREFIX=${PREFIX:-backup}
 
 . /etc/container_environment.sh
 
+
 # Bailout if any command fails
 set -e
 
