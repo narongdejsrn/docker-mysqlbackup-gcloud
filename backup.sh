@@ -33,7 +33,17 @@ fi
 # Upload the backups to gcloud
 gcloud auth activate-service-account --key-file /app/key.json
 
-gsutil mv $DIR/* gs://$BUCKET
+gsutil mv $DIR/* gs://$BUCKET/$DES_DIR
 
 # Clean up
 rm -rf $DIR
+
+if [ -n "$MAX_BACKUPS" ]
+then
+  while [ "$(gsutil ls gs://$BUCKET/$DES_DIR  | grep ".sql.gz$" | wc -l)" -gt "$MAX_BACKUPS" ];
+  do
+    TARGET=$(gsutil ls gs://$BUCKET/$DES_DIR | grep ".sql.gz$" | sort | head -n 1)
+    echo "Backup $TARGET is deleted"
+    gsutil rm -rf "$TARGET"
+  done
+fi
