@@ -1,10 +1,10 @@
 # Usage
 
-`docker run -e BUCKET= -e MYSQL_ROOT_PWD= -e PREFIX= --link db:mysql -v /key:/app zenyai/docker-mysqlbackup-gcloud`
+`docker run -e BUCKET= -e MYSQL_ROOT_PWD= -e PREFIX= -e MAX_BACKUPS= -e DES_DIR= --link db:mysql -v /key:/app zenyai/docker-mysqlbackup-gcloud`
 
 Use `docker exec <container> /backup.sh` to take an immediate backup.
 
-Backup every 12 hours
+Backup every 2 am
 
 References
  - https://github.com/nickbreen/docker-mysql-backup-cron
